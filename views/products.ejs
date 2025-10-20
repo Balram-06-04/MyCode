@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-300">
+    <!-- Navbar -->
+    <header class="bg-black text-white p-3 flex justify-between">
+      <div>
+        <h1 class="text-2xl font-bold italic">Shop Mee...</h1>
+      </div>
+      <div class="flex gap-6 justify-center items-center">
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">Home</p>
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">Products</p>
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">Contact</p>
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">About</p>
+      </div>
+    </header>
+    <div class="h-screen bg-black flex justify-between">
+      <div
+        class="bg-zinc-300 w-1/4 h-screen flex flex-col gap-12 p-2 text-black font-semibold"
+      >
+        <div>
+          <p>Sort by</p>
+          <select name="" id="" class="border w-40 rounded bg-green-400">
+            <option value="Default" class="hover:text-white cursor-pointer">
+              Popular
+            </option>
+            <option value="lowtohigh">Price : Low to High</option>
+            <option value="hightolow">Price : High to Low</option>
+            <option value="nameAZ">Name : A-Z</option>
+            <option value="nameZA">Name : Z-A</option>
+          </select>
+        </div>
+        <div>
+          <p class="hover:text-white cursor-pointer">New Collection</p>
+          <p class="hover:text-white cursor-pointer">All Products</p>
+          <p class="hover:text-white cursor-pointer">Discounted Products</p>
+        </div>
+        <div>
+          <p class="hover:text-white cursor-pointer">Filter by :</p>
+          <p class="hover:text-white cursor-pointer">Availability</p>
+          <p class="hover:text-white cursor-pointer">Discount</p>
+        </div>
+      </div>
+      <div
+        class="bg-white w-full min-h-screen flex flex-wrap gap-4 p-4 justify-start"
+      >
+        <% products.forEach(function(product){ %>
+        <div
+          class="w-[200px] bg-gray-100 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+        >
+          <div class="h-[200px] w-full bg-gray-300 overflow-hidden">
+            <img
+              class="object-cover w-full h-full"
+              src="<%= product.image %>"
+              alt="<%= product.name %>"
+            />
+          </div>
+          <div
+            class="bg-[<%= product.panelColor %>] p-3 flex justify-between items-center font-semibold text-sm"
+          >
+            <div>
+              <p class="font-mono text-[<%= product.textColor %>]"><%= product.name %></p>
+              <p class="font-mono text-[<%= product.textColor %>]">₹<%= product.price %></p>
+            </div>
+            <button
+              class="flex justify-center items-center bg-white text-xl h-8 w-8 border rounded-full cursor-pointer transform transition duration-200 hover:scale-110"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

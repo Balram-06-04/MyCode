@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register/Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div
+      class="bg-zinc-700 h-screen w-full flex flex-col md:flex-row gap-6 justify-center items-center p-4"
+    >
+      <!-- Registration Form -->
+      <div class="text-white">
+        <p class="text-3xl text-center mb-4">Create your account</p>
+        <form
+          class="flex flex-col w-72 md:w-96 border text-black bg-slate-800 rounded-lg p-4"
+          action="/users/register"
+          method="post"
+        >
+          <input
+            class="border m-2 p-2 rounded-lg"
+            type="text"
+            placeholder="Name"
+            name="name"
+          />
+          <input
+            class="border m-2 p-2 rounded-lg"
+            type="email"
+            placeholder="Email"
+            name="email"
+          />
+          <input
+            class="border m-2 p-2 rounded-lg"
+            type="password"
+            placeholder="Password"
+            name="password"
+          />
+          <input
+            class="border m-2 p-2 rounded-lg w-40 m-auto bg-blue-600 text-white hover:bg-blue-700"
+            type="submit"
+            value="Create My Account"
+          />
+        </form>
+      </div>
+
+      <!-- Login Form -->
+      <div class="text-white">
+        <p class="text-3xl text-center mb-4">Login to your account</p>
+        <form
+          class="flex flex-col w-72 md:w-96 bg-slate-600 text-black border rounded-lg p-4"
+          action="/users/login"
+          method="post"
+        >
+          <input
+            class="border m-2 p-2 rounded-lg text-black"
+            type="email"
+            placeholder="Email"
+            name="email"
+          />
+          <input
+            class="border m-2 p-2 rounded-lg"
+            type="password"
+            placeholder="Password"
+            name="password"
+          />
+          <input
+            class="border m-2 p-2 rounded-lg w-40 m-auto bg-blue-600 text-white hover:bg-blue-700"
+            type="submit"
+            value="Login"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

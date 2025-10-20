@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-black text-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="border-b border-gray-700 p-3">
+      <nav class="flex justify-between items-center max-w-6xl mx-auto">
+        <h1 class="text-xl font-semibold">Admin Panel</h1>
+
+        <div class="flex gap-10">
+          <div class="flex gap-6">
+            <p class="cursor-pointer hover:text-gray-400">Home</p>
+            <p class="cursor-pointer hover:text-gray-400">Products</p>
+          </div>
+          <div class="flex gap-6">
+            <p class="cursor-pointer hover:text-gray-400">Cart</p>
+            <p class="cursor-pointer hover:text-gray-400">My Account</p>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="bg-slate-700 flex flex-1 gap-6 justify-center items-start p-6">
+      <!-- Sidebar -->
+      <aside
+        class="w-1/3 max-w-xs border border-gray-600 p-4 rounded-lg bg-slate-800"
+      >
+        <p class="font-semibold mb-2">All Products</p>
+        <p class="font-semibold">Create New Product</p>
+      </aside>
+
+      <!-- Create Product Form -->
+      <section class="flex flex-col justify-center items-center w-full">
+        <h2 class="text-3xl font-bold text-center mb-4">Create New Product</h2>
+
+        <form
+          action="/products/addproduct"
+          method="post"
+          enctype="multipart/form-data"
+          class="flex flex-wrap justify-center items-center gap-3 border border-gray-600 bg-gray-100 text-black rounded-lg p-2"
+        >
+          <div class="flex flex-col gap-2 p-2 w-[270px]">
+            <h3 class="text-xl font-bold text-center text-gray-800">
+              Product Details
+            </h3>
+            <label for="image">Product Image :</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              class="border p-1 rounded"
+            />
+
+            <input
+              class="border p-1 rounded"
+              type="text"
+              name="name"
+              placeholder="Product Name"
+            />
+            <input
+              class="border p-1 rounded"
+              type="number"
+              name="price"
+              placeholder="Product Price"
+            />
+            <input
+              class="border p-1 rounded"
+              type="number"
+              name="discount"
+              placeholder="Discount Price"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2 p-2 min-w-[250px]">
+            <h3 class="text-xl font-bold text-center text-gray-800">
+              Panel Details
+            </h3>
+            <input
+              class="border p-1 rounded"
+              type="text"
+              name="bgColor"
+              placeholder="Background Color"
+            />
+            <input
+              class="border p-1 rounded"
+              type="text"
+              name="textColor"
+              placeholder="Text Color"
+            />
+            <input
+              class="border p-1 rounded"
+              type="text"
+              name="panelColor"
+              placeholder="Panel Color"
+            />
+          </div>
+
+          <div class="w-full flex justify-center mt-4">
+            <input
+              type="submit"
+              value="Add Product"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg cursor-pointer"
+            />
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
