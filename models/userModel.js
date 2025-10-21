@@ -9,7 +9,12 @@ const UserSchema = new mongoose.Schema({
     unique: true,
   },
   password: String,
-  cart: [],
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
   orders: [],
   contact: Number,
   picture: String,

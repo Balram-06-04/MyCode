@@ -3,7 +3,7 @@ const router = express.Router();
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const productModel=require("../models/productModel")
+const productModel = require("../models/productModel");
 // ✅ Test route
 router.get("/", (req, res) => {
   res.send("User route working");
@@ -43,7 +43,9 @@ router.post("/register", async (req, res) => {
 
     // Send cookie + response
     res.cookie("token", token, { httpOnly: true });
-    res.status(201).json({ message: "User registered", user: createdUser });
+    // res.status(201).json({ message: "User registered", user: createdUser });
+    const products = await productModel.find();
+    res.status(201).render("products", { products });
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).send("Server error");

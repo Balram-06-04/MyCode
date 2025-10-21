@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Cart</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-300">
+    <!-- Navbar -->
+    <header class="bg-black text-white p-3 flex justify-between">
+      <div>
+        <h1 class="text-2xl font-bold italic">My Cart...</h1>
+      </div>
+      <div class="flex gap-6 justify-center items-center">
+        <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold"
+          >Home</a
+        >
+        <a
+          href="/products/getproducts"
+          class="hover:text-gray-400 cursor-pointer font-semibold"
+          >Products</a
+        >
+        <a
+          href="/products/cart"
+          class="hover:text-gray-400 cursor-pointer font-semibold"
+          >Cart</a
+        >
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">Contact</p>
+        <p class="hover:text-gray-400 cursor-pointer font-semibold">About</p>
+      </div>
+    </header>
+
+    <div class="h-screen bg-black flex justify-center items-start p-4">
+      <div
+        class="bg-zinc-200 w-full min-h-screen flex flex-wrap gap-4 p-4 justify-start rounded-lg shadow-lg"
+      >
+        <% if (cart.length === 0) { %>
+        <p class="text-center text-lg text-gray-600 w-full">
+          Your cart is empty 😢
+        </p>
+        <% } else { %> <% cart.slice().reverse().forEach(function(product){ %>
+        <div
+          class="w-[200px] hover:scale-105 cursor-pointer overflow-hidden transition rounded-lg "
+        >
+          <div class="h-[180px] w-full overflow-hidden">
+            <img
+              class="object-cover w-full h-full"
+              src="<%= product.image %>"
+              alt="<%= product.name %>"
+            />
+          </div>
+          <div
+            class="p-3 flex h-20 justify-between items-center font-semibold text-sm bg-[<%= product.panelColor %>]"
+          >
+            <div>
+              <p class="font-mono text-[<%= product.textColor %>]">
+                <%= product.name %>
+              </p>
+              <p class="font-mono text-[<%= product.textColor %>]">
+                ₹<%= product.price %>
+              </p>
+            </div>
+            <div class="flex flex-col">
+              <button
+                class="bg-green-500 text-xs text-white px-2 py-0.5 rounded mt-2 hover:bg-green-600 transition"
+              >
+                Buy Now
+              </button>
+              <button
+                class="bg-red-500 text-xs text-white px-2 py-0.5 rounded mt-2 hover:bg-red-600 transition"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }) %> <% } %>
+      </div>
+    </div>
+  </body>
+</html>

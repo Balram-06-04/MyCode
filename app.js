@@ -21,8 +21,8 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.render("index");
 })
-app.get("/admin", (req, res) => {
-  res.render("admin");
+app.get("/adminCheck", (req, res) => {
+  res.render("adminCheck");
 })
 
 // app.use("/register")
