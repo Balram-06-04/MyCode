@@ -21,7 +21,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 router.get("/", (req, res) => {
   res.send("Product route working ✅");
 });
@@ -82,6 +81,7 @@ router.get("/addtocart/:productid", auth, async (req, res) => {
     res.status(500).send("Error adding to cart");
   }
 });
+
 router.get("/cart", auth, async (req, res) => {
   try {
     const user = await userModel
@@ -131,5 +131,41 @@ router.get("/sortproducts", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+router.get("/searchproducts", async (req, res) => {
+  try {
+    // Use req.query for GET requests
+    const searchTerm = req.query.productSearch;
+
+    // Case-insensitive search using regex
+    const products = await productModel.find({
+      name: { $regex: searchTerm, $options: "i" },
+    });
+
+    if (products.length === 0) {
+      return res.status(404).send("Product not found");
+    }
+
+    res.render("products", { products });
+  } catch (error) {
+    console.log("Error:", error);
+    res.status(500).send("Product Not Found");
+  }
+});
+
+router.get("/removefromcart/:productid", auth, async (req, res) => {
+  try {
+    await userModel.updateOne(
+      { _id: req.user._id },
+      { $pull: { cart: req.params.productid } }
+    );
+
+    res.redirect("/products/cart");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error removing from cart");
+  }
+});
+
+
 
 module.exports = router;
