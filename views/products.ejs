@@ -8,67 +8,69 @@
   </head>
   <body class="bg-gray-300">
     <!-- Navbar -->
-    <header class="bg-black text-white p-3 flex justify-between">
+    <header class="bg-black text-white p-3 flex justify-between items-center">
       <div>
         <h1 class="text-2xl font-bold italic">Shop Mee...</h1>
       </div>
       <div class="flex justify-center items-center">
+        <!-- Desktop Links -->
         <div class="hidden md:flex">
           <div class="flex gap-6 justify-center items-center">
-            <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold"
-              >Home</a
-            >
-            <a
-              href="/products/getproducts"
-              class="hover:text-gray-400 cursor-pointer font-semibold"
-              >Products</a
-            >
-            <a
-              href="/products/cart"
-              class="hover:text-gray-400 cursor-pointer font-semibold"
-              >Cart</a
-            >
+            <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold">Home</a>
+            <a href="/products/getproducts" class="hover:text-gray-400 cursor-pointer font-semibold">Products</a>
+            <a href="/products/cart" class="hover:text-gray-400 cursor-pointer font-semibold">Cart</a>
             <p class="hover:text-gray-400 cursor-pointer font-semibold">Contact</p>
             <p class="hover:text-gray-400 cursor-pointer font-semibold">About</p>
           </div>
-          <div></div>
         </div>
-        <div class="flex flex-col md:hidden">
-          <span class="w-6  h-1 m-0.5 rounded bg-white"></span>
-          <span class="w-6  h-1 m-0.5 rounded bg-white"></span>
-          <span class="w-6  h-1 m-0.5 rounded bg-white"></span>
+
+        <!-- Hamburger Button -->
+        <div id="menu-btn" class="flex flex-col md:hidden cursor-pointer">
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
         </div>
       </div>
     </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden w-full flex justify-end items-center bg-slate-300">
+      <div class="flex flex-col gap-2 justify-center items-center border p-2 text-white font-bold w-full">
+        <a href="/" class="hover:text-gray-400 underline cursor-pointer font-semibold">Home</a>
+        <a href="/products/getproducts" class="hover:text-gray-400 underline cursor-pointer font-semibold">Products</a>
+        <a href="/products/cart" class="hover:text-gray-400 underline cursor-pointer font-semibold">Cart</a>
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">Contact</p>
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">About</p>
+      </div>
+    </div>
+
+    <!-- Main Section -->
     <div class="h-full bg-zinc-200 flex justify-between">
       <div
         class="bg-zinc-300 w-1/5 hidden md:flex flex-col gap-12 p-2 text-black font-semibold"
       >
-      <div>
-        <form action="/products/searchproducts" method="get" class="flex gap-2  rounded">
-          <input type="text" name="productSearch" placeholder="Search Product" class="w-30 h-10 mx-1 bg-white rounded-lg  p-1">
-          <input type="submit" value="Search" class="p-1 bg-white rounded-lg  p-1">
-        </form>
-      </div>
+        <div>
+          <form action="/products/searchproducts" method="get" class="flex gap-2 rounded">
+            <input type="text" name="productSearch" placeholder="Search Product" class="w-30 h-10 mx-1 bg-white rounded-lg p-1" />
+            <input type="submit" value="Search" class="p-1 bg-white rounded-lg p-1" />
+          </form>
+        </div>
         <div>
           <p>Sort by</p>
-         <form action="/products/sortproducts" method="get" class="mb-4">
-          <select
-            name="sort"
-            onchange="this.form.submit()"
-            class="border w-40 rounded bg-zinc-400 text-black font-semibold p-1"
-          >
-            <% let currentSort = typeof sortType !== "undefined" ? sortType : ""; %>
-
-            <option value="" <%= currentSort === "" ? "selected" : "" %>>Default</option>
-            <option value="lowtohigh" <%= currentSort === "lowtohigh" ? "selected" : "" %>>Price: Low to High</option>
-            <option value="hightolow" <%= currentSort === "hightolow" ? "selected" : "" %>>Price: High to Low</option>
-            <option value="nameAZ" <%= currentSort === "nameAZ" ? "selected" : "" %>>Name: A-Z</option>
-            <option value="nameZA" <%= currentSort === "nameZA" ? "selected" : "" %>>Name: Z-A</option>
-
-          </select>
-        </form>
-
+          <form action="/products/sortproducts" method="get" class="mb-4">
+            <select
+              name="sort"
+              onchange="this.form.submit()"
+              class="border w-40 rounded bg-zinc-400 text-black font-semibold p-1"
+            >
+              <% let currentSort = typeof sortType !== "undefined" ? sortType : ""; %>
+              <option value="" <%= currentSort === "" ? "selected" : "" %>>Default</option>
+              <option value="lowtohigh" <%= currentSort === "lowtohigh" ? "selected" : "" %>>Price: Low to High</option>
+              <option value="hightolow" <%= currentSort === "hightolow" ? "selected" : "" %>>Price: High to Low</option>
+              <option value="nameAZ" <%= currentSort === "nameAZ" ? "selected" : "" %>>Name: A-Z</option>
+              <option value="nameZA" <%= currentSort === "nameZA" ? "selected" : "" %>>Name: Z-A</option>
+            </select>
+          </form>
         </div>
         <div>
           <p class="hover:text-white cursor-pointer">New Collection</p>
@@ -81,14 +83,14 @@
           <p class="hover:text-white cursor-pointer">Discount</p>
         </div>
       </div>
+
+      <!-- Products Section -->
       <div
         class="bg-zinc-200 w-full h-full flex flex-wrap gap-4 p-4 justify-start"
       >
         <% products.slice().reverse().forEach(function(product){ %>
-        <div
-          class="w-[180px]  hover:scale-105 cursor-pointer overflow-hidden transition"
-        >
-          <div class="h-[170px] w-full overflow-hidden">
+        <div class="w-[170px] hover:scale-105 cursor-pointer overflow-hidden transition">
+          <div class="h-[160px] w-full overflow-hidden">
             <img
               class="object-cover w-full h-full"
               src="<%= product.image %>"
@@ -99,12 +101,8 @@
             class="bg-[<%= product.panelColor %>] p-3 flex justify-between items-center font-semibold text-sm"
           >
             <div>
-              <p class="font-mono text-[<%= product.textColor %>]">
-                <%= product.name %>
-              </p>
-              <p class="font-mono text-[<%= product.textColor %>]">
-                ₹<%= product.price %>
-              </p>
+              <p class="font-mono text-[<%= product.textColor %>]"><%= product.name %></p>
+              <p class="font-mono text-[<%= product.textColor %>]">₹<%= product.price %></p>
             </div>
             <a
               href="/products/addtocart/<%= product._id %>"
@@ -117,10 +115,10 @@
         <% }) %>
       </div>
     </div>
+
+    <!-- Footer -->
     <footer class="bg-black text-gray-300 py-10 px-8 mt-10">
-      <div
-        class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
-      >
+      <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <!-- Brand -->
         <div>
           <h2 class="text-2xl font-bold italic text-white mb-3">Shop Mee...</h2>
@@ -135,14 +133,8 @@
           <h3 class="text-lg font-semibold text-white mb-3">Quick Links</h3>
           <ul class="space-y-2 text-sm">
             <li><a href="/" class="hover:text-green-400">Home</a></li>
-            <li>
-              <a href="/products/getproducts" class="hover:text-green-400"
-                >Products</a
-              >
-            </li>
-            <li>
-              <a href="/products/cart" class="hover:text-green-400">Cart</a>
-            </li>
+            <li><a href="/products/getproducts" class="hover:text-green-400">Products</a></li>
+            <li><a href="/products/cart" class="hover:text-green-400">Cart</a></li>
             <li><a href="#" class="hover:text-green-400">About Us</a></li>
             <li><a href="#" class="hover:text-green-400">Contact</a></li>
           </ul>
@@ -150,16 +142,12 @@
 
         <!-- Customer Service -->
         <div>
-          <h3 class="text-lg font-semibold text-white mb-3">
-            Customer Service
-          </h3>
+          <h3 class="text-lg font-semibold text-white mb-3">Customer Service</h3>
           <ul class="space-y-2 text-sm">
             <li><a href="#" class="hover:text-green-400">FAQs</a></li>
             <li><a href="#" class="hover:text-green-400">Return Policy</a></li>
             <li><a href="#" class="hover:text-green-400">Shipping Info</a></li>
-            <li>
-              <a href="#" class="hover:text-green-400">Terms & Conditions</a>
-            </li>
+            <li><a href="#" class="hover:text-green-400">Terms & Conditions</a></li>
           </ul>
         </div>
 
@@ -174,30 +162,32 @@
             />
             <button
               type="submit"
-              class="bg-green-500 hover:bg-green-600 text-white px-2 py-2  rounded font-semibold"
+              class="bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded font-semibold"
             >
               Subscribe
             </button>
           </form>
           <div class="flex gap-4">
-            <a href="#" class="hover:text-green-400"
-              ><i class="fab fa-facebook"></i> Facebook</a
-            >
-            <a href="#" class="hover:text-green-400"
-              ><i class="fab fa-instagram"></i> Instagram</a
-            >
-            <a href="#" class="hover:text-green-400"
-              ><i class="fab fa-twitter"></i> Twitter</a
-            >
+            <a href="#" class="hover:text-green-400">Facebook</a>
+            <a href="#" class="hover:text-green-400">Instagram</a>
+            <a href="#" class="hover:text-green-400">Twitter</a>
           </div>
         </div>
       </div>
 
-      <div
-        class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500"
-      >
+      <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
         © <%= new Date().getFullYear() %> Shop Mee. All rights reserved.
       </div>
     </footer>
+
+    <!-- Toggle Script -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>

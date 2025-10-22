@@ -8,11 +8,12 @@
   </head>
   <body class="bg-gray-300">
     <!-- Navbar -->
-    <header class="bg-black text-white p-3 flex justify-between">
+    <header class="bg-black text-white p-3 flex justify-between items-center">
       <div>
-        <h1 class="text-2xl font-bold italic">My Cart...</h1>
+        <h1 class="text-2xl font-bold italic">Shop Mee...</h1>
       </div>
       <div class="flex justify-center items-center">
+        <!-- Desktop Links -->
         <div class="hidden md:flex">
           <div class="flex gap-6 justify-center items-center">
             <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold"
@@ -35,15 +36,48 @@
               About
             </p>
           </div>
-          <div></div>
         </div>
-        <div class="flex flex-col md:hidden">
+
+        <!-- Hamburger Button -->
+        <div id="menu-btn" class="flex flex-col md:hidden cursor-pointer">
           <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
           <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
           <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
         </div>
       </div>
     </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div
+      id="mobile-menu"
+      class="hidden w-full flex justify-end items-center bg-slate-400"
+    >
+      <div
+        class="flex flex-col gap-2 justify-center items-center border p-2 text-white font-bold w-full"
+      >
+        <a
+          href="/"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Home</a
+        >
+        <a
+          href="/products/getproducts"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Products</a
+        >
+        <a
+          href="/products/cart"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Cart</a
+        >
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          Contact
+        </p>
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          About
+        </p>
+      </div>
+    </div>
 
     <div class="h-screen bg-black flex justify-center items-start">
       <div
@@ -55,9 +89,9 @@
         </p>
         <% } else { %> <% cart.slice().reverse().forEach(function(product){ %>
         <div
-          class="w-[180px] hover:scale-105 cursor-pointer overflow-hidden transition rounded-lg"
+          class="w-[170px] hover:scale-105 cursor-pointer overflow-hidden transition rounded-lg"
         >
-          <div class="h-[170px] w-full overflow-hidden">
+          <div class="h-[160px] w-full overflow-hidden">
             <img
               class="object-cover w-full h-full"
               src="<%= product.image %>"
@@ -93,5 +127,14 @@
         <% }) %> <% } %>
       </div>
     </div>
+    <!-- Toggle Menu -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>
