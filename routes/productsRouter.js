@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
+const cloudinary = require("./cloudinary");
 const productModel = require("../models/productModel");
 const userModel = require("../models/userModel");
 const auth = require("../middlewares/auth");
@@ -19,23 +21,55 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
+// Multer config (temporary local storage, just for upload)
+const upload = multer({ dest: "../public/uploads/images" });
 
 router.get("/", (req, res) => {
   res.send("Product route working ✅");
 });
 
 // Add new product
+// router.post("/addproduct", upload.single("image"), async (req, res) => {
+//   try {
+//     const { name, price, discount, bgColor, panelColor, textColor } = req.body;
+
+//     // Store public-facing path (not full local path)
+//     const image = req.file ? "/uploads/images/" + req.file.filename : null;
+
+//     // Save the product in DB
+//     await productModel.create({
+//       image,
+//       name,
+//       price,
+//       discount,
+//       bgColor,
+//       panelColor,
+//       textColor,
+//     });
+
+//     // After adding, redirect to the products page
+//     res.redirect("/products/getproducts");
+//   } catch (error) {
+//     console.error("Error adding product:", error);
+//     res.status(500).send("Failed to create product");
+//   }
+// });
 router.post("/addproduct", upload.single("image"), async (req, res) => {
   try {
     const { name, price, discount, bgColor, panelColor, textColor } = req.body;
 
-    // Store public-facing path (not full local path)
-    const image = req.file ? "/uploads/images/" + req.file.filename : null;
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "productsImage", // optional Cloudinary folder
+    });
+
+    // Delete temp file
+    fs.unlinkSync(req.file.path);
 
     // Save the product in DB
     await productModel.create({
-      image,
+      image: result.secure_url,
       name,
       price,
       discount,
@@ -165,7 +199,5 @@ router.get("/removefromcart/:productid", auth, async (req, res) => {
     res.status(500).send("Error removing from cart");
   }
 });
-
-
 
 module.exports = router;
