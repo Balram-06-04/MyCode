@@ -98,6 +98,14 @@ router.get("/getproducts", auth, async (req, res) => {
   }
 });
 
+// get product details
+// routes/products.js
+router.get("/productDetails/:id", async (req, res) => {
+  const product = await productModel.findById(req.params.id);
+  res.render("productDetails", { product });
+});
+
+
 router.get("/addtocart/:productid", auth, async (req, res) => {
   try {
     // Find the logged-in user (attached by auth middleware)

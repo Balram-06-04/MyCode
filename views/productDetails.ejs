@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-300">
+    <!-- Navbar -->
+    <header class="bg-black text-white p-3 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold italic">Shop Mee...</h1>
+      </div>
+      <div class="flex justify-center items-center">
+        <!-- Desktop Links -->
+        <div class="hidden md:flex">
+          <div class="flex gap-6 justify-center items-center">
+            <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Home</a
+            >
+            <a
+              href="/products/getproducts"
+              class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Products</a
+            >
+            <a
+              href="/products/cart"
+              class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Cart</a
+            >
+            <p class="hover:text-gray-400 cursor-pointer font-semibold">
+              Contact
+            </p>
+            <p class="hover:text-gray-400 cursor-pointer font-semibold">
+              About
+            </p>
+          </div>
+        </div>
+
+        <!-- Hamburger Button -->
+        <div id="menu-btn" class="flex flex-col md:hidden cursor-pointer">
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div
+      id="mobile-menu"
+      class="hidden w-full flex justify-end items-center bg-slate-400"
+    >
+      <div
+        class="flex flex-col gap-2 justify-center items-center border p-2 text-white font-bold w-full"
+      >
+        <a
+          href="/"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Home</a
+        >
+        <a
+          href="/products/getproducts"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Products</a
+        >
+        <a
+          href="/products/cart"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Cart</a
+        >
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          Contact
+        </p>
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          About
+        </p>
+      </div>
+    </div>
+
+    <!-- Product Container -->
+    <div
+      class="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-8 bg-white shadow-lg rounded-2xl mt-10"
+    >
+      <!-- Left: Product Image -->
+      <div class="flex flex-col justify-center items-center">
+        <img
+          src="<%= product.image %>"
+          alt="<%= product.name %>"
+          class="rounded-xl shadow-md hover:scale-105 transition duration-300"
+        />
+      </div>
+
+      <!-- Right: Product Details -->
+      <div class="flex flex-col justify-between">
+        <!-- Title -->
+        <div>
+          <h1 class="text-3xl font-semibold mb-2"><%= product.name %></h1>
+        </div>
+
+        <!-- Price and Discount -->
+        <div class="mt-4">
+          <% const discountPrice = product.price -
+          (product.price * (product.discount / 100)); %> <% if (product.discount
+          > 0) { %>
+          <p class="text-gray-500 line-through">₹<%= product.price %></p>
+          <p class="text-3xl font-bold text-green-600">
+            ₹<%= discountPrice.toFixed(0) %>
+            <span class="text-red-500 text-sm ml-2"
+              >(<%= product.discount %>% OFF)</span
+            >
+          </p>
+          <% } else { %>
+          <p class="text-3xl font-bold text-green-600">₹<%= product.price %></p>
+          <% } %>
+          <p class="text-sm text-gray-600 mt-1">Inclusive of all taxes</p>
+        </div>
+
+        <!-- Key Highlights -->
+        <div class="mt-6">
+          <h2 class="font-semibold mb-2">Highlights:</h2>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>Hello World</li>
+            <li>Hello Dunia</li>
+            <li>Hello Jee</li>
+            <li>Hello Sir</li>
+          </ul>
+        </div>
+
+        <!-- Stock and Delivery -->
+        <div class="mt-4 text-sm">
+          <p class="text-green-600 font-medium">In Stock</p>
+          <p class="text-gray-600">Delivered within 3–5 business days</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-4 mt-6">
+          <a
+            href="/products/addtocart/<%= product._id %>"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold w-full text-center"
+          >
+            Add to Cart
+          </a>
+          <a
+            href="#"
+            class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold w-full text-center"
+          >
+            Buy Now
+          </a>
+        </div>
+
+        <!-- Extra Info -->
+        <div class="mt-6 border-t pt-4 text-sm text-gray-600">
+          <p>• 10 days replacement policy</p>
+          <p>• Secure payment options</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toggle Menu -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
