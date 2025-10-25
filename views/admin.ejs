@@ -8,22 +8,76 @@
   </head>
   <body class="bg-black text-white min-h-screen flex flex-col">
     <!-- Navbar -->
-    <header class="border-b border-gray-700 p-3">
-      <nav class="flex justify-between items-center max-w-6xl mx-auto">
-        <h1 class="text-xl font-semibold">Admin Panel</h1>
-
-        <div class="flex gap-10">
-          <div class="flex gap-6">
-            <a href="/" class="cursor-pointer hover:text-gray-400">Home</a>
-            <a href="/products/getproducts" class="cursor-pointer hover:text-gray-400">Products</a>
-          </div>
-          <div class="flex gap-6">
-            <p class="cursor-pointer hover:text-gray-400">Cart</p>
-            <p class="cursor-pointer hover:text-gray-400">My Account</p>
+    <header class="bg-black text-white p-3 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold italic">Admin Panel...</h1>
+      </div>
+      <div class="flex justify-center items-center">
+        <!-- Desktop Links -->
+        <div class="hidden md:flex">
+          <div class="flex gap-6 justify-center items-center">
+            <a href="/" class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Home</a
+            >
+            <a
+              href="/products/getproducts"
+              class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Products</a
+            >
+            <a
+              href="/products/cart"
+              class="hover:text-gray-400 cursor-pointer font-semibold"
+              >Cart</a
+            >
+            <p class="hover:text-gray-400 cursor-pointer font-semibold">
+              Contact
+            </p>
+            <p class="hover:text-gray-400 cursor-pointer font-semibold">
+              About
+            </p>
           </div>
         </div>
-      </nav>
+
+        <!-- Hamburger Button -->
+        <div id="menu-btn" class="flex flex-col md:hidden cursor-pointer">
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+          <span class="w-6 h-1 m-0.5 rounded bg-white"></span>
+        </div>
+      </div>
     </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div
+      id="mobile-menu"
+      class="hidden w-full flex justify-end items-center bg-slate-300"
+    >
+      <div
+        class="flex flex-col gap-2 justify-center items-center border p-2 text-white font-bold w-full"
+      >
+        <a
+          href="/"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Home</a
+        >
+        <a
+          href="/products/getproducts"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Products</a
+        >
+        <a
+          href="/products/cart"
+          class="hover:text-gray-400 underline cursor-pointer font-semibold"
+          >Cart</a
+        >
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          Contact
+        </p>
+        <p class="hover:text-gray-400 underline cursor-pointer font-semibold">
+          About
+        </p>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <main class="bg-slate-700 flex flex-1 gap-6 justify-center items-start p-6">
@@ -75,7 +129,7 @@
               class="border p-1 rounded"
               type="number"
               name="discount"
-              placeholder="Discount Price"
+              placeholder="Discount Percent"
             />
           </div>
 
@@ -113,5 +167,14 @@
         </form>
       </section>
     </main>
+    <!-- Toggle Menu -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>

@@ -10,7 +10,7 @@
     <!-- Navbar -->
     <header class="bg-black text-white p-3 flex justify-between items-center">
       <div>
-        <h1 class="text-2xl font-bold italic">Shop Mee...</h1>
+        <h1 class="text-2xl font-bold italic">My Cart...</h1>
       </div>
       <div class="flex justify-center items-center">
         <!-- Desktop Links -->
@@ -81,7 +81,7 @@
 
     <div class="h-screen bg-black flex justify-center items-start">
       <div
-        class="bg-zinc-200 w-full min-h-screen flex flex-wrap gap-4 p-4 justify-start rounded-lg shadow-lg"
+        class="bg-zinc-200 w-full min-h-screen flex flex-wrap gap-4 p-4 justify-center rounded-lg shadow-lg"
       >
         <% if (cart.length === 0) { %>
         <p class="text-center text-lg text-gray-600 w-full">
@@ -89,9 +89,9 @@
         </p>
         <% } else { %> <% cart.slice().reverse().forEach(function(product){ %>
         <div
-          class="w-[160px] hover:scale-105 cursor-pointer overflow-hidden transition rounded-lg"
+          class="w-[165px] hover:scale-105 cursor-pointer overflow-hidden transition "
         >
-          <div class="h-[150px] w-full overflow-hidden">
+          <div class="h-[155px] w-full overflow-hidden">
             <img
               class="object-cover w-full h-full"
               src="<%= product.image %>"
