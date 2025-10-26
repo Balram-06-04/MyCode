@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
   res.send("Product route working ✅");
 });
 
-// Add new product
+// Add new product through multer
 // router.post("/addproduct", upload.single("image"), async (req, res) => {
 //   try {
 //     const { name, price, discount, bgColor, panelColor, textColor } = req.body;

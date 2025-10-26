@@ -3,22 +3,18 @@ const userModel = require("../models/userModel");
 
 module.exports = async (req, res, next) => {
   try {
-    // Get token from cookie
     const token = req.cookies.token;
-    if (!token) return res.status(401).send("Please login first");
+    if (!token) return res.redirect("/login"); // redirect instead of sending plain text
 
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_KEY); // use same secret as login
-
-    // Find user
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
     const user = await userModel.findOne({ email: decoded.email });
-    if (!user) return res.status(404).send("User not found");
+    if (!user) return res.redirect("/login");
 
-    // Attach to req
     req.user = user;
     next();
   } catch (err) {
     console.error("Auth error:", err);
-    res.status(401).send("Unauthorized");
+    res.clearCookie("token");
+    return res.redirect("/login");
   }
 };
