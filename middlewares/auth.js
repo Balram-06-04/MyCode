@@ -8,13 +8,13 @@ module.exports = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     const user = await userModel.findOne({ email: decoded.email });
-    if (!user) return res.redirect("/login");
+    if (!user) return res.redirect("/");
 
     req.user = user;
     next();
   } catch (err) {
     console.error("Auth error:", err);
     res.clearCookie("token");
-    return res.redirect("/login");
+    return res.render("products");
   }
 };
