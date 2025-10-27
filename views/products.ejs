@@ -88,39 +88,39 @@
 
       <!-- Products Section -->
      <div class="bg-zinc-200 w-full h-full flex flex-wrap gap-4 p-3 justify-center">
-  <% products.slice().reverse().forEach(function(product){ %>
-    <div class="w-[165px] cursor-pointer overflow-hidden transition hover:scale-105 relative shadow-sm">
+      <% products.slice().forEach(function(product){ %>
+        <div class="w-[165px] cursor-pointer overflow-hidden transition hover:scale-105 relative shadow-sm">
 
-      <!-- Clickable area for product details -->
-      <a href="/products/productDetails/<%= product._id %>">
-        <div class="h-[155px] w-full overflow-hidden">
-          <img
-            class="object-cover w-full h-full"
-            src="<%= product.image %>"
-            alt="<%= product.name %>"
-          />
+          <!-- Clickable area for product details -->
+          <a href="/products/productDetails/<%= product._id %>">
+            <div class="h-[155px] w-full overflow-hidden">
+              <img
+                class="object-cover w-full h-full"
+                src="<%= product.image %>"
+                alt="<%= product.name %>"
+              />
+            </div>
+
+            <div
+              class="bg-[<%= product.panelColor %>] h-10 p-3 flex justify-between items-center font-semibold text-sm">
+              <div>
+                <p class="text-[<%= product.textColor %>] font-mono"><%= product.name %></p>
+                <p class="text-[<%= product.textColor %>] font-mono">₹<%= product.price %></p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Add to cart button -->
+          <a
+            href="/products/addtocart/<%= product._id %>"
+            class="absolute bottom-2 right-2 bg-white text-xl h-6 w-6 flex justify-center items-center border rounded-full hover:scale-110 transition"
+            title="Add to Cart"
+          >
+            +
+          </a>
+
         </div>
-
-        <div
-          class="bg-[<%= product.panelColor %>] h-10 p-3 flex justify-between items-center font-semibold text-sm">
-          <div>
-            <p class="text-[<%= product.textColor %>] font-mono"><%= product.name %></p>
-            <p class="text-[<%= product.textColor %>] font-mono">₹<%= product.price %></p>
-          </div>
-        </div>
-      </a>
-
-      <!-- Add to cart button -->
-      <a
-        href="/products/addtocart/<%= product._id %>"
-        class="absolute bottom-2 right-2 bg-white text-xl h-6 w-6 flex justify-center items-center border rounded-full hover:scale-110 transition"
-        title="Add to Cart"
-      >
-        +
-      </a>
-
-    </div>
-  <% }) %>
+      <% }) %>
 </div>
 
     </div>

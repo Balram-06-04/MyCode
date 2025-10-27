@@ -99,7 +99,6 @@ router.get("/getproducts", auth, async (req, res) => {
 });
 
 // get product details
-// routes/products.js
 router.get("/productDetails/:id", async (req, res) => {
   const product = await productModel.findById(req.params.id);
   res.render("productDetails", { product });
@@ -108,7 +107,6 @@ router.get("/productDetails/:id", async (req, res) => {
 
 router.get("/addtocart/:productid", auth, async (req, res) => {
   try {
-    // Find the logged-in user (attached by auth middleware)
     const user = await userModel.findOne({ email: req.user.email });
 
     if (!user) return res.status(404).send("User not found");
@@ -144,22 +142,22 @@ router.get("/cart", auth, async (req, res) => {
 // Show products with sorting
 router.get("/sortproducts", async (req, res) => {
   try {
-    const sortType = req.query.sort || ""; // get query parameter
+    const sortType = req.query.sort || "";
 
     let sortOption = {};
 
     switch (sortType) {
       case "lowtohigh":
-        sortOption = { price: -1 };
-        break;
-      case "hightolow":
         sortOption = { price: 1 };
         break;
+      case "hightolow":
+        sortOption = { price: -1 };
+        break;
       case "nameAZ":
-        sortOption = { name: -1 };
+        sortOption = { name: 1 };
         break;
       case "nameZA":
-        sortOption = { name: 1 };
+        sortOption = { name: -1 };
         break;
       default:
         sortOption = {};
@@ -175,10 +173,8 @@ router.get("/sortproducts", async (req, res) => {
 });
 router.get("/searchproducts", async (req, res) => {
   try {
-    // Use req.query for GET requests
     const searchTerm = req.query.productSearch;
 
-    // Case-insensitive search using regex
     const products = await productModel.find({
       name: { $regex: searchTerm, $options: "i" },
     });

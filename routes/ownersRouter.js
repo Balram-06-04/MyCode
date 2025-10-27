@@ -64,4 +64,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/adminCheck", (req, res) => {
+  res.render("adminCheck");
+});
+
 module.exports = router;

@@ -4,7 +4,7 @@ const userModel = require("../models/userModel");
 module.exports = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    if (!token) return res.redirect("/login"); // redirect instead of sending plain text
+    if (!token) return res.redirect("/"); // redirect to login page
 
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     const user = await userModel.findOne({ email: decoded.email });
