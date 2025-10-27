@@ -148,16 +148,16 @@ router.get("/sortproducts", async (req, res) => {
 
     switch (sortType) {
       case "lowtohigh":
-        sortOption = { price: 1 };
-        break;
-      case "hightolow":
         sortOption = { price: -1 };
         break;
+      case "hightolow":
+        sortOption = { price: 1 };
+        break;
       case "nameAZ":
-        sortOption = { name: 1 };
+        sortOption = { name: -1 };
         break;
       case "nameZA":
-        sortOption = { name: -1 };
+        sortOption = { name: 1 };
         break;
       default:
         sortOption = {};
